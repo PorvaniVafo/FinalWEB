@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css">
+    <title>User Authentication</title>
+</head>
+<body>
+    <div class="container" id="app">
+        <!-- Registration Form -->
+        <div v-if="!user && !loggedIn">
+            <h2>Sign Up</h2>
+            <form @submit.prevent="register">
+                <label for="regName">Name:</label>
+                <input type="text" id="regName" v-model="registerData.name" required>
+
+                <label for="regEmail">Email:</label>
+                <input type="email" id="regEmail" v-model="registerData.email" required>
+
+                <label for="regPassword">Password:</label>
+                <input type="password" id="regPassword" v-model="registerData.password" required>
+
+                <button type="submit">Sign Up</button>
+            </form>
+            <u>Already have an account? <a @click="switchToLogin">Log In</a></u>
+        </div>
+
+        <!-- Login Form -->
+        <div v-if="!user && loggedIn">
+            <h2>Login</h2>
+            <form @submit.prevent="login">
+                <label for="loginEmail">Email:</label>
+                <input type="email" id="loginEmail" v-model="loginData.email" required>
+
+                <label for="loginPassword">Password:</label>
+                <input type="password" id="loginPassword" v-model="loginData.password" required>
+
+                <button type="submit">Login</button>
+            </form>
+        </div>
+
+        <!-- User Info and Logout Button -->
+        <div v-if="user">
+            <h2>Welcome, {{ user.name }}!</h2>
+            <button @click="logout">Logout</button>
+        </div>
+    </div>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="index.js"></script>
+</body>
+</html>
